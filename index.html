@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>還日堂 KANJITSUDŌ｜準備中</title>
+  <meta name="description" content="還日堂 KANJITSUDŌ 公式サイトは現在準備中です。開業に向けて、ただいま静かに整えております。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+JP:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050403;
+      --gold: #d6b170;
+      --white-soft: rgba(255,255,255,.86);
+      --white-muted: rgba(255,255,255,.62);
+      --white-faint: rgba(255,255,255,.18);
+      --serif-jp: "Noto Serif JP", "Yu Mincho", serif;
+      --serif-en: "Cormorant Garamond", "Noto Serif JP", serif;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background: var(--bg);
+      color: #fff;
+      font-family: var(--serif-en);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: url("https://res.cloudinary.com/dvr7rww8q/image/upload/v1778985617/ChatGPT_Image_2026%E5%B9%B45%E6%9C%8817%E6%97%A5_11_39_54_sqaqzc.png");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      transform: scale(1.02);
+      filter: saturate(.82) brightness(.76);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 74% 42%, rgba(214,177,112,.13), transparent 34%),
+        linear-gradient(90deg, rgba(0,0,0,.68) 0%, rgba(0,0,0,.42) 42%, rgba(0,0,0,.72) 100%),
+        linear-gradient(to bottom, rgba(5,4,3,.78), rgba(5,4,3,.36) 34%, rgba(5,4,3,.92));
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 22px 12px;
+      background: linear-gradient(to bottom, rgba(5,4,3,.86), rgba(5,4,3,.18), transparent);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .crest {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      opacity: .96;
+      filter: drop-shadow(0 2px 12px rgba(0,0,0,.35));
+    }
+
+    .brand-ja {
+      font-family: var(--serif-jp);
+      font-size: 18px;
+      line-height: 1;
+      letter-spacing: .12em;
+      font-weight: 300;
+      text-shadow: 0 2px 12px rgba(0,0,0,.35);
+    }
+
+    .brand-en {
+      margin-top: 3px;
+      font-size: 8px;
+      line-height: 1;
+      letter-spacing: .34em;
+      font-weight: 400;
+      opacity: .92;
+    }
+
+    .header-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-family: var(--serif-jp);
+      font-size: 13px;
+      letter-spacing: .18em;
+    }
+
+    .header-links a {
+      color: rgba(255,255,255,.84);
+      text-decoration: none;
+      transition: opacity .3s ease;
+    }
+
+    .header-links a:hover { opacity: .68; }
+
+    .main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 120px 8.8vw 86px;
+    }
+
+    .content {
+      width: min(760px, 100%);
+      opacity: 0;
+      transform: translateY(26px);
+      filter: blur(6px);
+      animation: fadeUp 2.2s ease forwards .2s;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 30px;
+      font-family: var(--serif-en);
+      font-size: 15px;
+      letter-spacing: .34em;
+      color: rgba(214,177,112,.86);
+      font-weight: 400;
+    }
+
+    h1 {
+      font-family: var(--serif-jp);
+      font-weight: 200;
+      font-size: clamp(42px, 6vw, 82px);
+      line-height: 1.42;
+      letter-spacing: .18em;
+      color: rgba(255,255,255,.96);
+      text-shadow: 0 4px 34px rgba(0,0,0,.58);
+    }
+
+    .lead {
+      margin-top: 34px;
+      font-family: var(--serif-jp);
+      font-size: clamp(14px, 1.25vw, 17px);
+      line-height: 2.35;
+      letter-spacing: .14em;
+      font-weight: 300;
+      color: rgba(255,255,255,.76);
+      max-width: 620px;
+    }
+
+    .status-card {
+      width: min(560px, 100%);
+      margin-top: 48px;
+      padding: 28px 0 0;
+      border-top: 1px solid rgba(255,255,255,.16);
+      font-family: var(--serif-jp);
+      color: rgba(255,255,255,.66);
+      letter-spacing: .14em;
+      font-size: 13px;
+      line-height: 2.1;
+    }
+
+    .status-card span {
+      display: block;
+      margin-bottom: 8px;
+      font-family: var(--serif-en);
+      font-size: 13px;
+      letter-spacing: .28em;
+      color: rgba(214,177,112,.82);
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 42px;
+      font-family: var(--serif-jp);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 224px;
+      height: 58px;
+      padding: 0 30px;
+      border: 1px solid rgba(255,255,255,.28);
+      color: rgba(255,255,255,.94);
+      text-decoration: none;
+      background: rgba(255,255,255,.035);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-size: 13px;
+      letter-spacing: .2em;
+      transition: background .35s ease, border-color .35s ease, transform .35s ease;
+    }
+
+    .button:hover {
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.62);
+      transform: translateY(-2px);
+    }
+
+    .text-link {
+      color: rgba(214,177,112,.82);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: .18em;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(214,177,112,.28);
+      transition: opacity .3s ease;
+    }
+
+    .text-link:hover { opacity: .7; }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      padding: 0 8.8vw 34px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 28px;
+      color: rgba(255,255,255,.46);
+      font-family: var(--serif-jp);
+      font-size: 11px;
+      line-height: 1.9;
+      letter-spacing: .16em;
+    }
+
+    .footer-en {
+      font-family: var(--serif-en);
+      font-size: 13px;
+      letter-spacing: .28em;
+      color: rgba(255,255,255,.64);
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      body::before {
+        background-position: center center;
+        filter: saturate(.78) brightness(.64);
+      }
+
+      body::after {
+        background:
+          radial-gradient(circle at 50% 38%, rgba(214,177,112,.10), transparent 38%),
+          linear-gradient(to bottom, rgba(5,4,3,.74), rgba(5,4,3,.32) 34%, rgba(5,4,3,.94));
+      }
+
+      header {
+        height: 70px;
+        padding: 9px 14px;
+      }
+
+      .crest {
+        width: 48px;
+        height: 48px;
+      }
+
+      .brand-ja {
+        font-size: 16px;
+        letter-spacing: .1em;
+      }
+
+      .brand-en {
+        font-size: 7px;
+        letter-spacing: .22em;
+      }
+
+      .header-links {
+        gap: 16px;
+        font-size: 11px;
+        letter-spacing: .12em;
+      }
+
+      .header-links .reserve-head {
+        display: none;
+      }
+
+      .main {
+        align-items: flex-end;
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 108px 7vw 94px;
+      }
+
+      .eyebrow {
+        margin-bottom: 22px;
+        font-size: 12px;
+        letter-spacing: .26em;
+      }
+
+      h1 {
+        font-size: clamp(33px, 11vw, 48px);
+        line-height: 1.52;
+        letter-spacing: .12em;
+      }
+
+      .lead {
+        margin-top: 26px;
+        font-size: 13px;
+        line-height: 2.15;
+        letter-spacing: .08em;
+      }
+
+      .status-card {
+        margin-top: 34px;
+        padding-top: 24px;
+        font-size: 12px;
+        line-height: 2;
+        letter-spacing: .09em;
+      }
+
+      .actions {
+        margin-top: 34px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .button {
+        min-width: 0;
+        width: 100%;
+        height: 54px;
+        font-size: 12px;
+        letter-spacing: .16em;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 7vw 28px;
+        font-size: 10px;
+        letter-spacing: .11em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <a href="./" class="brand" aria-label="還日堂トップへ">
+        <img class="crest" src="https://res.cloudinary.com/dvr7rww8q/image/upload/v1779030104/ChatGPT_Image_2026%E5%B9%B45%E6%9C%8818%E6%97%A5_00_00_07_xy3xk1.png" alt="還日堂ロゴ">
+        <div>
+          <div class="brand-ja">還日堂</div>
+          <div class="brand-en">KANJITSUDŌ</div>
+        </div>
+      </a>
+      <nav class="header-links" aria-label="外部リンク">
+        <a class="reserve-head" href="https://reserve.kanjitsudo.jp/">ご予約</a>
+        <a href="https://www.instagram.com/kanjitsudo/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </nav>
+    </header>
+
+    <main class="main">
+      <section class="content" aria-labelledby="page-title">
+        <span class="eyebrow">COMING SOON</span>
+        <h1 id="page-title">ただいま、<br>開業に向けて<br>整えております。</h1>
+        <p class="lead">
+          還日堂 公式サイトは現在準備中です。<br>
+          東洋医学の叡智をもとに、心身が本来の状態へ還るための場所として、静かに支度を進めております。
+        </p>
+
+        <div class="status-card">
+          <span>KANJITSUDŌ</span>
+          詳細なご案内は、準備が整い次第こちらのページにてお知らせいたします。<br>
+          最新のお知らせはInstagramをご覧ください。
+        </div>
+
+        <div class="actions">
+          <a class="button" href="https://reserve.kanjitsudo.jp/">ご予約はこちら<span aria-hidden="true" style="margin-left:18px;">›</span></a>
+          <a class="text-link" href="https://www.instagram.com/kanjitsudo/" target="_blank" rel="noopener noreferrer">Instagramを見る</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>
+        <div class="footer-en">KANJITSUDŌ</div>
+        <div>還日堂</div>
+      </div>
+      <div>10:00 - 20:00 / Irregular holidays</div>
+    </footer>
+  </div>
+</body>
+</html>
