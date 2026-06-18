@@ -30,6 +30,8 @@
       overflow-x: hidden;
     }
 
+    body.is-modal-open { overflow: hidden; }
+
     body::before {
       content: "";
       position: fixed;
@@ -122,13 +124,52 @@
       letter-spacing: .18em;
     }
 
-    .header-links a {
+    .header-links a,
+    .header-contact {
       color: rgba(255,255,255,.84);
       text-decoration: none;
       transition: opacity .3s ease;
+      border: none;
+      background: transparent;
+      font: inherit;
+      letter-spacing: inherit;
+      cursor: pointer;
     }
 
-    .header-links a:hover { opacity: .68; }
+    .header-links a:hover,
+    .header-contact:hover { opacity: .68; }
+
+    .instagram-icon {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border: 2px solid rgba(255,255,255,.9);
+      border-radius: 8px;
+      position: relative;
+      transform: translateY(1px);
+    }
+
+    .instagram-icon::before {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border: 2px solid rgba(255,255,255,.9);
+      border-radius: 50%;
+      left: 7px;
+      top: 7px;
+    }
+
+    .instagram-icon::after {
+      content: "";
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255,255,255,.9);
+      border-radius: 50%;
+      right: 5px;
+      top: 5px;
+    }
 
     .main {
       flex: 1;
@@ -210,7 +251,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 224px;
+      min-width: 250px;
       height: 58px;
       padding: 0 30px;
       border: 1px solid rgba(255,255,255,.28);
@@ -219,8 +260,10 @@
       background: rgba(255,255,255,.035);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
+      font-family: var(--serif-jp);
       font-size: 13px;
       letter-spacing: .2em;
+      cursor: pointer;
       transition: background .35s ease, border-color .35s ease, transform .35s ease;
     }
 
@@ -264,6 +307,182 @@
       color: rgba(255,255,255,.64);
     }
 
+    .contact-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 88px 24px 36px;
+      background: rgba(3,2,2,.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .contact-modal.is-open { display: flex; }
+
+    .contact-panel {
+      position: relative;
+      width: min(760px, 100%);
+      max-height: calc(100vh - 124px);
+      overflow-y: auto;
+      padding: 46px 48px 44px;
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.018)),
+        rgba(7,5,4,.92);
+      box-shadow: 0 28px 90px rgba(0,0,0,.45);
+      font-family: var(--serif-jp);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.035);
+      color: rgba(255,255,255,.78);
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .modal-en {
+      display: block;
+      margin-bottom: 12px;
+      font-family: var(--serif-en);
+      font-size: 13px;
+      letter-spacing: .28em;
+      color: rgba(214,177,112,.82);
+    }
+
+    .contact-panel h2 {
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 300;
+      letter-spacing: .12em;
+      margin-bottom: 16px;
+    }
+
+    .modal-lead {
+      color: rgba(255,255,255,.68);
+      font-size: 13px;
+      line-height: 2;
+      letter-spacing: .1em;
+      margin-bottom: 30px;
+    }
+
+    .contact-form { display: grid; gap: 18px; }
+
+    .form-row { display: grid; gap: 9px; }
+
+    .form-row label {
+      font-size: 12px;
+      color: rgba(255,255,255,.68);
+      letter-spacing: .16em;
+    }
+
+    .form-row input,
+    .form-row textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.045);
+      color: rgba(255,255,255,.92);
+      font-family: var(--serif-jp);
+      font-size: 14px;
+      line-height: 1.8;
+      letter-spacing: .08em;
+      padding: 13px 15px;
+      outline: none;
+    }
+
+    .form-row textarea { resize: vertical; min-height: 150px; }
+
+    .form-row input:focus,
+    .form-row textarea:focus {
+      border-color: rgba(214,177,112,.52);
+      background: rgba(255,255,255,.065);
+    }
+
+    .form-actions,
+    .confirm-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 14px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .confirm-btn,
+    .send-btn,
+    .back-btn {
+      min-width: 170px;
+      height: 50px;
+      padding: 0 24px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.045);
+      color: rgba(255,255,255,.9);
+      font-family: var(--serif-jp);
+      font-size: 12px;
+      letter-spacing: .14em;
+      cursor: pointer;
+      transition: opacity .3s ease, background .3s ease, border-color .3s ease;
+    }
+
+    .send-btn { border-color: rgba(214,177,112,.38); color: rgba(255,255,255,.94); }
+    .back-btn { color: rgba(255,255,255,.68); }
+    .confirm-btn:hover,
+    .send-btn:hover,
+    .back-btn:hover { opacity: .78; background: rgba(255,255,255,.08); }
+    .send-btn:disabled { opacity: .45; cursor: wait; }
+
+    .confirm-panel,
+    .thanks-panel { display: none; }
+    .contact-panel.is-confirm .contact-form-wrap,
+    .contact-panel.is-confirm .modal-lead,
+    .contact-panel.is-thanks .contact-form-wrap,
+    .contact-panel.is-thanks .modal-lead { display: none; }
+    .contact-panel.is-confirm .confirm-panel,
+    .contact-panel.is-thanks .thanks-panel { display: block; }
+
+    .confirm-list {
+      margin-top: 24px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .confirm-list div {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,.09);
+    }
+
+    .confirm-list dt {
+      color: rgba(255,255,255,.5);
+      font-size: 12px;
+      letter-spacing: .13em;
+    }
+
+    .confirm-list dd {
+      color: rgba(255,255,255,.84);
+      font-size: 14px;
+      line-height: 1.9;
+      letter-spacing: .08em;
+    }
+
+    .thanks-panel p {
+      margin-top: 18px;
+      color: rgba(255,255,255,.72);
+      font-size: 14px;
+      line-height: 2.1;
+      letter-spacing: .11em;
+    }
+
     @keyframes fadeUp {
       to {
         opacity: 1;
@@ -305,13 +524,31 @@
       }
 
       .header-links {
-        gap: 16px;
+        gap: 15px;
         font-size: 11px;
-        letter-spacing: .12em;
+        letter-spacing: .11em;
       }
 
-      .header-links .reserve-head {
-        display: none;
+      .instagram-icon {
+        width: 24px;
+        height: 24px;
+        border-width: 1.6px;
+        border-radius: 7px;
+      }
+
+      .instagram-icon::before {
+        width: 9px;
+        height: 9px;
+        border-width: 1.6px;
+        left: 5.5px;
+        top: 5.5px;
+      }
+
+      .instagram-icon::after {
+        width: 3px;
+        height: 3px;
+        right: 4px;
+        top: 4px;
       }
 
       .main {
@@ -370,6 +607,41 @@
         font-size: 10px;
         letter-spacing: .11em;
       }
+
+      .contact-modal {
+        align-items: flex-start;
+        padding: 82px 12px 18px;
+      }
+
+      .contact-panel {
+        max-height: calc(100vh - 100px);
+        padding: 36px 20px 28px;
+      }
+
+      .modal-close {
+        top: 12px;
+        right: 12px;
+      }
+
+      .modal-lead {
+        font-size: 12px;
+        letter-spacing: .08em;
+      }
+
+      .form-actions,
+      .confirm-actions {
+        justify-content: stretch;
+        flex-direction: column-reverse;
+      }
+
+      .confirm-btn,
+      .send-btn,
+      .back-btn { width: 100%; }
+
+      .confirm-list div {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
     }
   </style>
 </head>
@@ -384,8 +656,10 @@
         </div>
       </a>
       <nav class="header-links" aria-label="外部リンク">
-        <a class="reserve-head" href="https://reserve.kanjitsudo.jp/">ご予約</a>
-        <a href="https://www.instagram.com/kanjitsudo/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <button type="button" class="header-contact" data-open-contact>お問い合わせ</button>
+        <a href="https://www.instagram.com/kanjitsudo/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <span class="instagram-icon" aria-hidden="true"></span>
+        </a>
       </nav>
     </header>
 
@@ -405,7 +679,7 @@
         </div>
 
         <div class="actions">
-          <a class="button" href="https://reserve.kanjitsudo.jp/">ご予約はこちら<span aria-hidden="true" style="margin-left:18px;">›</span></a>
+          <button type="button" class="button" data-open-contact>お問い合わせはこちら<span aria-hidden="true" style="margin-left:18px;">›</span></button>
           <a class="text-link" href="https://www.instagram.com/kanjitsudo/" target="_blank" rel="noopener noreferrer">Instagramを見る</a>
         </div>
       </section>
@@ -419,5 +693,211 @@
       <div>10:00 - 20:00 / Irregular holidays</div>
     </footer>
   </div>
+
+  <div class="contact-modal" id="contactModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+    <div class="contact-panel" id="contactPanel">
+      <button type="button" class="modal-close" id="closeContactModal" aria-label="閉じる">×</button>
+
+      <div class="contact-form-wrap">
+        <span class="modal-en">CONTACT</span>
+        <h2 id="contactTitle">お問い合わせ</h2>
+        <p class="modal-lead">
+          開業前のお問い合わせ、取材・ご相談などはこちらよりお送りください。<br>
+          内容を確認のうえ、折り返しご連絡いたします。
+        </p>
+
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <label for="name">お名前</label>
+            <input id="name" name="name" type="text" placeholder="例：山田 太郎" required>
+          </div>
+
+          <div class="form-row">
+            <label for="kana">ふりがな</label>
+            <input id="kana" name="kana" type="text" placeholder="例：やまだ たろう">
+          </div>
+
+          <div class="form-row">
+            <label for="tel">電話番号</label>
+            <input id="tel" name="tel" type="tel" placeholder="例：090-0000-0000">
+          </div>
+
+          <div class="form-row">
+            <label for="email">メールアドレス</label>
+            <input id="email" name="email" type="email" placeholder="例：info@example.com">
+          </div>
+
+          <div class="form-row">
+            <label for="message">お問い合わせ内容</label>
+            <textarea id="message" name="message" rows="7" placeholder="お問い合わせ内容をご記入ください。"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="confirm-btn" id="confirmBtn">入力内容を確認する</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="confirm-panel" id="confirmPanel" aria-hidden="true">
+        <span class="modal-en">CONFIRM</span>
+        <h2>入力内容の確認</h2>
+        <dl class="confirm-list" id="confirmList"></dl>
+        <div class="confirm-actions">
+          <button type="button" class="back-btn" id="backBtn">修正する</button>
+          <button type="button" class="send-btn" id="sendBtn">この内容で送信</button>
+        </div>
+      </div>
+
+      <div class="thanks-panel" id="thanksPanel" aria-hidden="true">
+        <span class="modal-en">THANK YOU</span>
+        <h2>送信が完了しました</h2>
+        <p>お問い合わせを受け付けました。<br>内容を確認のうえ、折り返しご連絡いたします。</p>
+        <div class="confirm-actions">
+          <button type="button" class="send-btn" id="finishBtn">閉じる</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CONTACT_API_URL = 'https://script.google.com/macros/s/AKfycbzezvSzJYCeBDwWd8k9G83xjzVeandVQUBE68FB5ywdaTvfUPHjNXWsSjaOignDl42DfQ/exec';
+    const IS_CANVAS_PREVIEW = location.hostname.includes('chatgpt') || location.hostname.includes('openai') || location.protocol === 'blob:';
+
+    const modal = document.getElementById('contactModal');
+    const panel = document.getElementById('contactPanel');
+    const form = document.getElementById('contactForm');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const backBtn = document.getElementById('backBtn');
+    const sendBtn = document.getElementById('sendBtn');
+    const finishBtn = document.getElementById('finishBtn');
+    const confirmList = document.getElementById('confirmList');
+    const confirmPanel = document.getElementById('confirmPanel');
+    const thanksPanel = document.getElementById('thanksPanel');
+
+    function openContactModal() {
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('is-modal-open');
+      panel.classList.remove('is-confirm', 'is-thanks');
+      confirmPanel.setAttribute('aria-hidden', 'true');
+      thanksPanel.setAttribute('aria-hidden', 'true');
+      setTimeout(() => document.getElementById('name').focus(), 120);
+    }
+
+    function closeContactModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('is-modal-open');
+      panel.classList.remove('is-confirm', 'is-thanks');
+    }
+
+    document.querySelectorAll('[data-open-contact]').forEach(button => {
+      button.addEventListener('click', openContactModal);
+    });
+
+    document.getElementById('closeContactModal').addEventListener('click', closeContactModal);
+    if (finishBtn) finishBtn.addEventListener('click', closeContactModal);
+
+    modal.addEventListener('click', event => {
+      if (event.target === modal) closeContactModal();
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && modal.classList.contains('is-open')) closeContactModal();
+    });
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;')
+        .replaceAll('\n', '<br>');
+    }
+
+    if (confirmBtn) confirmBtn.addEventListener('click', () => {
+      const tel = form.tel.value.trim();
+      const email = form.email.value.trim();
+
+      if (!tel && !email) {
+        alert('電話番号またはメールアドレスのどちらかをご入力ください。');
+        return;
+      }
+
+      if (!form.reportValidity()) return;
+
+      const data = [
+        ['お名前', form.name.value],
+        ['ふりがな', form.kana.value || '未入力'],
+        ['電話番号', form.tel.value || '未入力'],
+        ['メールアドレス', form.email.value || '未入力'],
+        ['お問い合わせ内容', form.message.value || '未入力']
+      ];
+
+      confirmList.innerHTML = data.map(([label, value]) => {
+        return `<div><dt>${label}</dt><dd>${escapeHtml(value)}</dd></div>`;
+      }).join('');
+
+      panel.classList.add('is-confirm');
+      panel.classList.remove('is-thanks');
+      confirmPanel.setAttribute('aria-hidden', 'false');
+      thanksPanel.setAttribute('aria-hidden', 'true');
+      panel.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    if (backBtn) backBtn.addEventListener('click', () => {
+      panel.classList.remove('is-confirm', 'is-thanks');
+      confirmPanel.setAttribute('aria-hidden', 'true');
+      thanksPanel.setAttribute('aria-hidden', 'true');
+      setTimeout(() => document.getElementById('name').focus(), 80);
+    });
+
+    if (sendBtn) sendBtn.addEventListener('click', async () => {
+      sendBtn.disabled = true;
+      sendBtn.textContent = '送信中...';
+
+      const payload = {
+        purpose: 'お問い合わせ',
+        name: form.name.value,
+        kana: form.kana.value,
+        tel: form.tel.value,
+        email: form.email.value,
+        message: form.message.value
+      };
+
+      const showThanks = () => {
+        panel.classList.remove('is-confirm');
+        panel.classList.add('is-thanks');
+        confirmPanel.setAttribute('aria-hidden', 'true');
+        thanksPanel.setAttribute('aria-hidden', 'false');
+        form.reset();
+        panel.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      if (IS_CANVAS_PREVIEW) {
+        showThanks();
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'この内容で送信';
+        return;
+      }
+
+      try {
+        await fetch(CONTACT_API_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+
+        showThanks();
+      } catch (error) {
+        alert('送信に失敗しました。時間をおいて再度お試しください。');
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'この内容で送信';
+      }
+    });
+  </script>
 </body>
 </html>
